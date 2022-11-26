@@ -22,9 +22,26 @@ public class MouseControl : MonoBehaviour
     {
         float mouseX = Input.GetAxis ("Mouse X");
         float mouseY = Input.GetAxis ("Mouse Y");
-        
+
+        if (Camera.main.transform.position.z > 0.21)
+        {
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0.21f);
+        }
+        if (Camera.main.transform.position.z < -21.51)
+        {
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, -21.51f);
+        }
+        if (Camera.main.transform.position.x > 3.5)
+        {
+            Camera.main.transform.position = new Vector3(3.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
+        }
+        if (Camera.main.transform.position.x < -3.5)
+        {
+            Camera.main.transform.position = new Vector3(-3.5f, Camera.main.transform.position.y, Camera.main.transform.position.z);
+        }
+
         // Left-click or middle-click to drag camera around
-        if(Input.GetMouseButton(0) || Input.GetMouseButton(2))
+        if (Input.GetMouseButton(0) || Input.GetMouseButton(2))
         {
             transform.Translate(new Vector3(-mouseX, 0.0f, -mouseY) * mouseSensitivity, Space.World);
         }
