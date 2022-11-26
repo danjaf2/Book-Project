@@ -54,13 +54,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Shelf.cs" />
+    <Compile Include="Assets\Scripts\ShelfManager.cs" />
     <Compile Include="Assets\Scripts\BookObject.cs" />
     <Compile Include="Assets\Scripts\HeartButton.cs" />
     <Compile Include="Assets\Scripts\Book.cs" />
     <Compile Include="Assets\Scripts\Button.cs" />
-    <Compile Include="Assets\Scripts\MouseControl.cs" />
-    <Compile Include="Assets\Scripts\ShelfManager.cs" />
     <Compile Include="Assets\BookDisplay.cs" />
+    <Compile Include="Assets\Scripts\MouseControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
