@@ -4,6 +4,12 @@ const cookieSession = require("cookie-session");
 const app = express();
 const port = 3000;
 
+const FavoriteShelfRoute = require('./src/routes/Shelves/FavoriteShelfRoute');
+const ReadingShelfRoute = require('./src/routes/Shelves/ReadingShelfRoute');
+const ReadShelfRoute = require('./src/routes/Shelves/ReadShelfRoute');
+const RecommendationShelfRoute = require('./src/routes/Shelves/RecommendationShelfRoute');
+const ToReadShelfRoute = require('./src/routes/Shelves/ToReadShelfRoute');
+
 app.use(cors());
 
 // parse requests of content-type - application/json
@@ -27,6 +33,14 @@ const User = db.user;
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+// Shelf routes
+app.use('/Favorite', FavoriteShelfRoute);
+app.use('/Reading', ReadingShelfRoute);
+app.use('/Read', ReadShelfRoute);
+app.use('/Recommendation', RecommendationShelfRoute);
+app.use('/ToRead', ToReadShelfRoute);
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
