@@ -8,9 +8,13 @@ public class Button : MonoBehaviour
     // Start is called before the first frame update
     public UnityEvent clickEvent = new UnityEvent();
     public GameObject button;
+    public Color c;
+    public SpriteRenderer rend;
 
     void Start()
     {
+        rend = this.GetComponent<SpriteRenderer>();
+        c = rend.color;
         button = this.gameObject;
     }
 
@@ -26,10 +30,17 @@ public class Button : MonoBehaviour
                 if (hit.collider.tag == "Button"&& hit.collider.gameObject==button)
                 {
                     clickEvent.Invoke();
-                    print("Here");
+                    StartCoroutine(colorChange());
                 }
 
             }
         }
     }
+
+    IEnumerator colorChange()
+    {
+        this.GetComponent<SpriteRenderer>().color = Color.black;
+        yield return new WaitForSeconds(.1f);
+        this.GetComponent<SpriteRenderer>().color = c;
+}
 }

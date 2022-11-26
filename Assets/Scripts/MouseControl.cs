@@ -22,6 +22,9 @@ public class MouseControl : MonoBehaviour
     {
         float mouseX = Input.GetAxis ("Mouse X");
         float mouseY = Input.GetAxis ("Mouse Y");
+        if(Input.mouseScrollDelta.y != 0)
+        Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z + Input.mouseScrollDelta.y * 0.1f);
+
 
         if (Camera.main.transform.position.z > 0.21)
         {

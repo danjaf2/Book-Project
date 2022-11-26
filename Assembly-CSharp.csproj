@@ -59,8 +59,9 @@
     <Compile Include="Assets\Scripts\HeartButton.cs" />
     <Compile Include="Assets\Scripts\Book.cs" />
     <Compile Include="Assets\Scripts\Button.cs" />
-    <Compile Include="Assets\BookDisplay.cs" />
+    <Compile Include="Assets\Scripts\BookDisplay.cs" />
     <Compile Include="Assets\Scripts\MouseControl.cs" />
+    <Compile Include="Assets\Scripts\AddGenresToList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
