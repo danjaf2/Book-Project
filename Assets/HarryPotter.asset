@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49ea1a0abe73af4ab5b866660a2139b, type: 3}
   m_Name: HarryPotter
   m_EditorClassIdentifier: 
-  name: Harry Potter 1
+  name: Harry Potter 2
   genre: 2
-  matImage: {fileID: 2100000, guid: a7240869afa2168429bc5f6e8d54e0b2, type: 2}
-  image: {fileID: 2800000, guid: 4a4bbd9e931a94b42ad531590388416b, type: 3}
+  matImage: {fileID: 2100000, guid: 31dc8f2d2bf517548929f91ecf46945b, type: 2}
+  image: {fileID: 2800000, guid: 34650c3770b381e4e899a5167caeeb4b, type: 3}

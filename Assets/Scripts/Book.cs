@@ -20,6 +20,7 @@ public class Book : MonoBehaviour
     public Texture2D image;
     public bool favorite;
     public GameObject heart;
+    public ShelfManager manager;
 
     private float targetHeight =1f;
     // Start is called before the first frame update
@@ -29,6 +30,7 @@ public class Book : MonoBehaviour
         genre = book.genre;
         matImage = book.matImage;
         image = book.image;
+        manager = GameObject.FindObjectOfType<ShelfManager>();
         this.GetComponent<Renderer>().material.color = colors[(int)genre];
         this.transform.GetChild(0).GetComponent<Renderer>().material=matImage;
     }
@@ -55,10 +57,12 @@ public class Book : MonoBehaviour
         if (!favorite)
         {
             favorite = true;
+            manager.addBookToFav(this);
         }
         else
         {
             favorite = false;
+            manager.addBookToFav(this);
         }
     }
 }

@@ -8,18 +8,14 @@ public class MouseControl : MonoBehaviour
     float mouseSensitivity;
 
 
-    public Text title;
-    public Text genre;
-    public RawImage cover;
+    public BookDisplay menu;
     public GameObject previousHovered;
 
 
     private void Start()
     {
-        title = GameObject.Find("Title").GetComponent<Text>();
-        cover = GameObject.Find("Cover").GetComponent<RawImage>();
-        genre = GameObject.Find("Genre").GetComponent<Text>();
-        title.transform.parent.gameObject.SetActive(false);
+        
+       
     }
 
     void Update ()
@@ -41,14 +37,12 @@ public class MouseControl : MonoBehaviour
             {
                 if (hit.collider.tag == "Book")
                 {
-                    title.transform.parent.gameObject.SetActive(true);
-                    title.text = "Title:" + hit.collider.gameObject.GetComponent<Book>().name;
-                    cover.texture = hit.collider.gameObject.GetComponent<Book>().image;
-                    genre.text = "Genre:" + hit.collider.gameObject.GetComponent<Book>().genre.ToString();
+                    print(hit.collider.gameObject.GetComponent<Book>());
+                    menu.Display(hit.collider.gameObject.GetComponent<Book>());
                 }
                 else
                 {
-                    title.transform.parent.gameObject.SetActive(false);
+                    menu.Hide();
                 }
             }
         }
@@ -56,14 +50,14 @@ public class MouseControl : MonoBehaviour
         Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray2, out hovered))
         {
-            if (hovered.collider.tag == "Book"|| hovered.collider.tag == "HeartButton")
+            if (hovered.collider.tag == "Book")
             {
                 if (previousHovered == null)
                 {
                     print("Here");
                     previousHovered = hovered.collider.gameObject;
                     previousHovered.GetComponent<Book>().heart.SetActive(true);
-                }else if (hovered.collider.gameObject != previousHovered)
+                }else if (previousHovered != null&&hovered.collider.gameObject != previousHovered)
                 {
                     previousHovered.GetComponent<Book>().heart.SetActive(false);
                     previousHovered = hovered.collider.gameObject;
@@ -76,10 +70,17 @@ public class MouseControl : MonoBehaviour
                 {
                     previousHovered.GetComponent<Book>().heart.SetActive(false);
                     previousHovered = null;
-                }
-                   
+                }  
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (previousHovered != null)
+            {
+                previousHovered.GetComponent<Book>().Favorite();
             }
             
         }
+
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49ea1a0abe73af4ab5b866660a2139b, type: 3}
   m_Name: Book
   m_EditorClassIdentifier: 
-  name: 
-  genre: 0
-  matImage: {fileID: 0}
-  image: {fileID: 0}
+  name: Johnny
+  genre: 4
+  matImage: {fileID: 2100000, guid: c6c75fe4f5af2a642963ea3f8f7c10c2, type: 2}
+  image: {fileID: 2800000, guid: 57ba56371a78e4e4b9314bc4fdc609a3, type: 3}
