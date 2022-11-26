@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger-output.json");
 const app = express();
 const port = 3000;
 
@@ -20,19 +22,17 @@ app.use(
   })
 );
 
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 const db = require("./src/models");
 db.sequelize.sync();
 const User = db.user;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(
+    `Server is running!\nAPI documentation: http://localhost:${port}/doc`
+  );
 });
 
-
-require('./src/routes/auth.routes')(app);
-require('./src/routes/user.routes')(app);
-
+require("./src/routes/auth.routes")(app);
+require("./src/routes/user.routes")(app);
