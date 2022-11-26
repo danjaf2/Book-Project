@@ -28,11 +28,14 @@ app.use(
   })
 );
 
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 const db = require("./src/models");
-db.sequelize.sync();
-const User = db.user;
+db.sequelize.sync().then(() => {
+    initial();
+});
+
+const Shelf = db.shelf;
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -54,3 +57,30 @@ app.listen(port, () => {
 
 require("./src/routes/auth.routes")(app);
 require("./src/routes/user.routes")(app);
+
+function initial() {
+    Shelf.create({
+        id: 1,
+        name: "Recommnded"
+    });
+
+    Shelf.create({
+        id: 2,
+        name: "Favorites"
+    });
+
+    Shelf.create({
+        id: 3,
+        name: "To Read"
+    });
+
+    Shelf.create({
+        id: 4,
+        name: "Read"
+    });
+
+    Shelf.create({
+        id: 5,
+        name: "Reading"
+    });
+}

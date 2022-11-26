@@ -22,19 +22,9 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.user = require("../models/user.model.js")(sequelize, Sequelize);
-
-// db.role.belongsToMany(db.user, {
-//   through: "user_roles",
-//   foreignKey: "roleId",
-//   otherKey: "userId",
-// });
-// db.user.belongsToMany(db.role, {
-//   through: "user_roles",
-//   foreignKey: "userId",
-//   otherKey: "roleId",
-// });
-
-// db.ROLES = ["user", "admin", "moderator"];
+db.user = require("./user.model.js")(sequelize, Sequelize);
+db.book = require("./book.model.js")(sequelize, Sequelize);
+db.shelf = require("./shelf.model.js")(sequelize, Sequelize);
+db.userBookShelf = require("./userBookShelf.model.js")(sequelize, Sequelize);
 
 module.exports = db;
