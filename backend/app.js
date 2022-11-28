@@ -6,11 +6,7 @@ const swaggerFile = require("./swagger-output.json");
 const app = express();
 const port = 3000;
 
-const FavoriteShelfRoute = require('./src/routes/Shelves/FavoriteShelfRoute');
-const ReadingShelfRoute = require('./src/routes/Shelves/ReadingShelfRoute');
-const ReadShelfRoute = require('./src/routes/Shelves/ReadShelfRoute');
-const RecommendationShelfRoute = require('./src/routes/Shelves/RecommendationShelfRoute');
-const ToReadShelfRoute = require('./src/routes/Shelves/ToReadShelfRoute');
+const AllShelvesRoute = require('./src/routes/AllShelvesRoute');
 
 app.use(cors());
 
@@ -41,12 +37,20 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// Shelf routes
-app.use('/Favorite', FavoriteShelfRoute);
-app.use('/Reading', ReadingShelfRoute);
-app.use('/Read', ReadShelfRoute);
-app.use('/Recommendation', RecommendationShelfRoute);
-app.use('/ToRead', ToReadShelfRoute);
+// debug only 
+(async () => {
+  const test1 = await db.sequelize.query('SELECT id, title, author, genre, cover FROM Books');
+  const test2 = await db.sequelize.query('SELECT id,name FROM Shelves');
+  const test3 = await db.sequelize.query('SELECT username FROM Users');
+  const test4 = await db.sequelize.query('SELECT id, userId, bookId, shelfId FROM UserBookShelves');
+  console.log(
+      JSON.stringify(test1,null,2) +
+      JSON.stringify(test2,null,2) + 
+      JSON.stringify(test3,null,2) + 
+      JSON.stringify(test4,null,2)
+  )
+})();
+
 
 
 app.listen(port, () => {
@@ -55,13 +59,16 @@ app.listen(port, () => {
   );
 });
 
+// Shelf routes
+app.use('/api', AllShelvesRoute);
+
 require("./src/routes/auth.routes")(app);
 require("./src/routes/user.routes")(app);
 
 function initial() {
     Shelf.create({
         id: 1,
-        name: "Recommnded"
+        name: "Recommended"
     });
 
     Shelf.create({

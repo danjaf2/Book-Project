@@ -11,6 +11,9 @@ module.exports = (sequelize, Sequelize) => {
     cover: {
       type: Sequelize.STRING,
     },
+    genre: {
+      type: Sequelize.STRING,
+    }
   });
 
   return Book;
