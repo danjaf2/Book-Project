@@ -22,7 +22,7 @@ public class ShelfManager : MonoBehaviour
 
 
         //Ressource Loading example
-        
+        /*
         BookObject obj = BookObject.CreateInstance("BookObject") as BookObject;
         obj.genre = Book.Genre.Dark;
         obj.name = "Jerry";
@@ -30,7 +30,7 @@ public class ShelfManager : MonoBehaviour
         obj.image = texture;
         list[0].book = obj;
         list[0].setBook();
-        
+        */
 
         for (int i = 0; i < list.Length; i++)
         {

@@ -38,7 +38,9 @@ public class Book : MonoBehaviour
     {
         name = book.name;
         genre = book.genre;
-        image = book.image;
+        var rect = new Rect(0, 0, book.image.width, book.image.height);
+        var sprite = Sprite.Create(book.image, rect, new Vector2(0.5f, 0.5f));
+        image = sprite;
         this.GetComponent<Renderer>().material.color = colors[(int)genre];
         this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = image;
     }
