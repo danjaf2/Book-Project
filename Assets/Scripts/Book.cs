@@ -21,6 +21,7 @@ public class Book : MonoBehaviour
     public bool favorite;
     public GameObject heart;
     public ShelfManager manager;
+    public int ID;
 
     private float targetHeight =1f;
     // Start is called before the first frame update
@@ -57,12 +58,15 @@ public class Book : MonoBehaviour
         if (!favorite)
         {
             favorite = true;
-            manager.addBookToFav(this);
+            Book copy = Instantiate(this);
+            copy.favorite = true;
+            copy.ID = this.ID;
+            manager.addBookToFav(copy);
         }
         else
         {
-            favorite = false;
             manager.addBookToFav(this);
+            
         }
     }
 }

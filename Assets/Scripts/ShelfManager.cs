@@ -22,6 +22,7 @@ public class ShelfManager : MonoBehaviour
         for (int i = 0; i < list.Length; i++)
         {
             allBooks.Add(list[i]);
+            allBooks[i].ID = i;
         }
     }
 
@@ -39,6 +40,7 @@ public class ShelfManager : MonoBehaviour
                 }
             }
         }
+        
     }
 
     public Shelf findCurrentShelf(Book book)
@@ -66,18 +68,48 @@ public class ShelfManager : MonoBehaviour
     }
     public void addBookToFav(Book book)
     {
-        Shelf currentShelf= findCurrentShelf(book);
-        if (currentShelf!=favShelf)
+        bool found = false;
+        for (int i = 0; i < favShelf.books.Count; i++)
+        {
+            if (book.ID == favShelf.books[i].ID)
+            {
+                found = true;
+                Book b = favShelf.books[i];
+                b.favorite = false;
+                favShelf.books.Remove(b);
+                b.transform.position = new Vector3(1000000f, 0f, 0f);
+            }
+        }
+        if (found)
+        {
+            for (int i = 0; i < allBooks.Count; i++)
+            {
+                if (book.ID == allBooks[i].ID)
+                {
+                    allBooks[i].favorite = false;
+                }
+            }
+        }
+        if (found == false)
+        {
+            favShelf.books.Add(book);
+        }
+        /*Shelf currentShelf= findCurrentShelf(book);
+        if (currentShelf!=favShelf && currentShelf!=null)
         {
             currentShelf.currentIndex = 0;
             currentShelf.books.Remove(book);
             favShelf.books.Add(book);
+        }else if (currentShelf == null)
+        {
+            favShelf.books.Add(book);
         }
         else
         {
+
             favShelf.books.Remove(book);
             favShelf.currentIndex = 0;
-        }
+        }*/
     }
 
     public void addBookToReading(Book book)

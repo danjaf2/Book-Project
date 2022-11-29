@@ -9,7 +9,7 @@ public class MouseControl : MonoBehaviour
 
 
     public BookDisplay menu;
-    public GameObject previousHovered;
+    public static GameObject previousHovered;
 
 
     private void Start()
