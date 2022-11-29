@@ -17,7 +17,7 @@ public class Book : MonoBehaviour
     [System.NonSerialized]
     private Material matImage;
     [System.NonSerialized]
-    public Texture2D image;
+    public Sprite image;
     public bool favorite;
     public GameObject heart;
     public ShelfManager manager;
@@ -27,13 +27,20 @@ public class Book : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        setBook();
+        heart = this.transform.GetChild(0).GetChild(0).gameObject;
+        heart.SetActive(false);
+        manager = GameObject.FindObjectOfType<ShelfManager>();
+        
+    }
+
+    public void setBook()
+    {
         name = book.name;
         genre = book.genre;
-        matImage = book.matImage;
         image = book.image;
-        manager = GameObject.FindObjectOfType<ShelfManager>();
         this.GetComponent<Renderer>().material.color = colors[(int)genre];
-        this.transform.GetChild(0).GetComponent<Renderer>().material=matImage;
+        this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = image;
     }
 
     // Update is called once per frame

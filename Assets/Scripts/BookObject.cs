@@ -8,6 +8,5 @@ public class BookObject : ScriptableObject
 {
     public string name;
     public Genre genre;
-    public Material matImage;
-    public Texture2D image;
+    public Sprite image;
 }

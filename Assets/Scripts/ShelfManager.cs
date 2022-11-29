@@ -19,6 +19,19 @@ public class ShelfManager : MonoBehaviour
         toReadShelf = GameObject.Find("ToReadShelf").GetComponent<Shelf>();
         readShelf = GameObject.Find("ReadShelf").GetComponent<Shelf>();
         var list = FindObjectsOfType<Book>();
+
+
+        //Ressource Loading example
+        
+        BookObject obj = BookObject.CreateInstance("BookObject") as BookObject;
+        obj.genre = Book.Genre.Dark;
+        obj.name = "Jerry";
+        var texture = Resources.Load<Sprite>("BookCovers/Cover3");
+        obj.image = texture;
+        list[0].book = obj;
+        list[0].setBook();
+        
+
         for (int i = 0; i < list.Length; i++)
         {
             allBooks.Add(list[i]);
@@ -115,6 +128,26 @@ public class ShelfManager : MonoBehaviour
     public void addBookToReading(Book book)
     {
         Shelf currentShelf = findCurrentShelf(book);
+        if (currentShelf == favShelf)
+        {
+            for (int i = 0; i < allBooks.Count; i++)
+            {
+                if (book.ID == allBooks[i].ID)
+                {
+                    print("HEY");
+                    if (book != allBooks[i])
+                    {
+                       Shelf shelf = findCurrentShelf(allBooks[i]);
+                        print(shelf.gameObject.name);
+                        shelf.currentIndex = 0;
+                        shelf.books.Remove(allBooks[i]);
+                        print("HERE");
+                        readingShelf.books.Add(allBooks[i]);
+                        return;
+                    }
+                }
+            }
+        }
         if (currentShelf != readingShelf)
         {
             currentShelf.currentIndex = 0;
@@ -132,6 +165,26 @@ public class ShelfManager : MonoBehaviour
     public void addBookToToRead(Book book)
     {
         Shelf currentShelf = findCurrentShelf(book);
+        if (currentShelf == favShelf)
+        {
+            for (int i = 0; i < allBooks.Count; i++)
+            {
+                if (book.ID == allBooks[i].ID)
+                {
+                    print("HEY");
+                    if (book != allBooks[i])
+                    {
+                        Shelf shelf = findCurrentShelf(allBooks[i]);
+                        print(shelf.gameObject.name);
+                        shelf.currentIndex = 0;
+                        shelf.books.Remove(allBooks[i]);
+                        print("HERE");
+                        toReadShelf.books.Add(allBooks[i]);
+                        return;
+                    }
+                }
+            }
+        }
         if (currentShelf != toReadShelf)
         {
             currentShelf.currentIndex = 0;
@@ -148,6 +201,26 @@ public class ShelfManager : MonoBehaviour
     public void addBookToRead(Book book)
     {
         Shelf currentShelf = findCurrentShelf(book);
+        if (currentShelf == favShelf)
+        {
+            for (int i = 0; i < allBooks.Count; i++)
+            {
+                if (book.ID == allBooks[i].ID)
+                {
+                    print("HEY");
+                    if (book != allBooks[i])
+                    {
+                        Shelf shelf = findCurrentShelf(allBooks[i]);
+                        print(shelf.gameObject.name);
+                        shelf.currentIndex = 0;
+                        shelf.books.Remove(allBooks[i]);
+                        print("HERE");
+                        readShelf.books.Add(allBooks[i]);
+                        return;
+                    }
+                }
+            }
+        }
         if (currentShelf != readShelf)
         {
             currentShelf.currentIndex = 0;
