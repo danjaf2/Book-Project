@@ -5,22 +5,17 @@ const jsonFile = require("./books.json");
 
 module.exports = {
   seed: function () {
+    Books.destroy({
+        truncate: true
+    });
     jsonFile.forEach((element, i) => {
-      if (
-        !Books.findOne({
-          where: {
-            title: element.title,
-            author: element.author,
-          },
-        })
-      ) {
-        Books.create({
-          id: i,
-          title: element["title"],
-          author: element["author"],
-          cover: element["cover"],
-        });
-      }
+      Books.create({
+        id: i,
+        title: element["title"],
+        author: element["author"],
+        cover: `${element["id"]}.jpg`,
+        genre: element["genre"],
+      });
     });
   },
 };

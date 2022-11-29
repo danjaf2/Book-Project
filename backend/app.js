@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
 // debug only
 (async () => {
   const test1 = await db.sequelize.query(
-    "SELECT id, title, author, genre, cover FROM Books"
+    "SELECT id, title, author, genre, cover FROM books"
   );
   const test2 = await db.sequelize.query("SELECT id,name FROM Shelves");
   const test3 = await db.sequelize.query("SELECT username FROM Users");
