@@ -65,6 +65,7 @@ app.use("/api", AllShelvesRoute);
 
 require("./src/routes/auth.routes")(app);
 require("./src/routes/user.routes")(app);
+require("./src/routes/booksRoute")(app);
 
 function initial() {
   const predefinedShelves = [
