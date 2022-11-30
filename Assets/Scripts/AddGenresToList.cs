@@ -19,6 +19,7 @@ public class AddGenresToList : MonoBehaviour
             var copy = Instantiate(itemTemplate);
             copy.transform.parent= content.transform;
             copy.GetComponentInChildren<Text>().text = ((Genre)i).ToString();
+            copy.GetComponentInChildren<Text>().color = Color.white;
             toggleList.Add(copy.GetComponent<Toggle>());
             toggleList[i].isOn = false;
         }

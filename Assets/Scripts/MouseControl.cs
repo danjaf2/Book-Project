@@ -53,7 +53,7 @@ public class MouseControl : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 20f))
             {
                 if (hit.collider.tag == "Book")
                 {
@@ -68,7 +68,7 @@ public class MouseControl : MonoBehaviour
         }
         RaycastHit hovered;
         Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray2, out hovered))
+        if (Physics.Raycast(ray2, out hovered, 20f))
         {
             if (hovered.collider.tag == "Book")
             {
