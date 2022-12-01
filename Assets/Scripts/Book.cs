@@ -9,7 +9,7 @@ public class Book : MonoBehaviour
     public string name;
     public enum Genre
     {
-        Horror, Comedy, Fantasy, Adventure, Lovecraft, Dark
+        Horror, Comedy, Fantasy, Adventure, Lovecraft, Dark ,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg
     }
     Color[] colors = { Color.green, Color.red, Color.white, Color.blue, Color.yellow, Color.black };
     [System.NonSerialized]

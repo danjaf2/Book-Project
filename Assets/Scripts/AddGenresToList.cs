@@ -10,7 +10,7 @@ public class AddGenresToList : MonoBehaviour
     public GameObject content;
     public List<Toggle> toggleList;
 
-    int amountOfGenres = 6;
+    int amountOfGenres = 37;
     // Start is called before the first frame update
     void Start()
     {

@@ -17,7 +17,7 @@ public class Shelf : MonoBehaviour
 
     public void Right()
     {
-        if (books.Count > 0)
+        if (books.Count > 1)
         {
             currentIndex = (currentIndex + 1) % books.Count;
         }
@@ -25,7 +25,7 @@ public class Shelf : MonoBehaviour
     }
     public void Left()
     {
-        if (books.Count > 0)
+        if (books.Count > 1)
         {
             currentIndex--;
             if (currentIndex < 0)
