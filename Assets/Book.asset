@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Book
   m_EditorClassIdentifier: 
   name: Johnny
-  genre: 4
+  author: John Doe
+  genre: 7
   image: {fileID: 2800000, guid: 4a4bbd9e931a94b42ad531590388416b, type: 3}

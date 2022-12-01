@@ -7,6 +7,7 @@ using static Book;
 public class BookObject : ScriptableObject
 {
     public string name;
+    public string author;
     public Genre genre;
     public Texture2D image;
 }

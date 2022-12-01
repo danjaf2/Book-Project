@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: HarryPotter
   m_EditorClassIdentifier: 
   name: Harry Potter 2
-  genre: 2
+  author: Dio
+  genre: 9
   image: {fileID: 2800000, guid: 34650c3770b381e4e899a5167caeeb4b, type: 3}

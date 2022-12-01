@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49ea1a0abe73af4ab5b866660a2139b, type: 3}
   m_Name: HarryPotter 1
   m_EditorClassIdentifier: 
-  name: Harry Potter 1
+  name: Harry Pot
+  author: Jihn
   genre: 2
   image: {fileID: 2800000, guid: 57ba56371a78e4e4b9314bc4fdc609a3, type: 3}

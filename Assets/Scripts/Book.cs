@@ -9,13 +9,12 @@ public class Book : MonoBehaviour
     public string name;
     public enum Genre
     {
-        Horror, Comedy, Fantasy, Adventure, Lovecraft, Dark ,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg
+        History, Fiction, Fantasy, Mystery, Poetry, Romance, NonFiction, Children, YoungAdult, Comics
     }
-    Color[] colors = { Color.green, Color.red, Color.white, Color.blue, Color.yellow, Color.black };
+    Color[] colors = { Color.green, Color.magenta, Color.cyan, Color.gray, Color.yellow, Color.red, Color.white, new Color32(255, 192, 203, 1), Color.black, new Color32(254, 161, 0, 1) };
     [System.NonSerialized]
     public Genre genre;
-    [System.NonSerialized]
-    private Material matImage;
+    public string author;
     [System.NonSerialized]
     public Sprite image;
     public bool favorite;
@@ -38,6 +37,7 @@ public class Book : MonoBehaviour
     {
         name = book.name;
         genre = book.genre;
+        author = book.author;
         var rect = new Rect(0, 0, book.image.width, book.image.height);
         var sprite = Sprite.Create(book.image, rect, new Vector2(0.5f, 0.5f));
         image = sprite;
