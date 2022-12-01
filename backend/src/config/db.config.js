@@ -4,7 +4,7 @@ module.exports = {
   PASSWORD: "password",
   DB: "testdb",
   dialect: "sqlite",
-  storage: "./database.sqlite3",
+  storage: "./database3.sqlite3",
   pool: {
     max: 5,
     min: 0,

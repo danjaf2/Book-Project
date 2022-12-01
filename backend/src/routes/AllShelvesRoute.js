@@ -42,7 +42,6 @@ router.get('/UserShelfBooks/:userId/:shelfId', async (req, res, next) => {
         console.log(e)
         res.status(400).send("Error fetching books");
     }
-
 })
 
 /**
