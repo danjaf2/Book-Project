@@ -6,6 +6,8 @@ const UserBookShelfdb = db.userBookShelf;
 const Booksdb = db.book;
 const router = express.Router();
 
+const maxNumberOfRecommendedBooks = 20;
+
 // Get book recommendations based on the selected genres
 // The recommendation implementation is to select a certain number of books
 // of the selected genres, and limit the total amount of books to around 20.
@@ -20,7 +22,7 @@ router.post("/books/recommendations", async (req, res) => {
     });
 
     await genres.forEach(async (g) => {
-      const allBooksOfGenre = await allBooks.filter(book => book.genre === g);
+      const allBooksOfGenre = await allBooks.filter((book) => book.genre === g);
       allBooksGenres.push(allBooksOfGenre);
     });
 
@@ -29,37 +31,53 @@ router.post("/books/recommendations", async (req, res) => {
     };
 
     // Based on the number of books per genre
-    const numberOfBooksPerGenre = Math.floor(20 / genres.length);
+    const numberOfBooksPerGenre = Math.floor(maxNumberOfRecommendedBooks / genres.length);
     const recommendedBooks = [];
-    allBooksGenres.forEach(async (books) => {
+    for (let i = 0; i < allBooksGenres.length; i++) {
+      const books = allBooksGenres[i];
+
+      let recommendedBooksForGenre = [];
       let allGood = true;
+
       // Shuffle the books array of the current genre
       // and take some numberOfBooksPerGenre number of books.
       // If the user already has a book that is in one of their shelves,
       // restart the process until all books are not in neither of their shelves.
       while (allGood) {
+        allGood = false;
+
+        console.log(books.filter((b) => b.genre == "History").length);
         shuffle(books);
-        const recommendedBooksForGenre = books.slice(0, numberOfBooksPerGenre);
+        recommendedBooksForGenre = books.slice(0, numberOfBooksPerGenre);
         for (let i = 0; i < recommendedBooksForGenre.length; i++) {
-          if (
-            await UserBookShelfdb.findOne({
-              where: { userId: userId, bookId: recommendedBooksForGenre[i].id },
-            })
-          ) {
+          const userBookShelf = await UserBookShelfdb.findOne({
+            where: { userId: userId, bookId: recommendedBooksForGenre[i].id },
+          });
+          if (userBookShelf) {
+            allGood = true;
+            recommendedBooksForGenre = [];
             break;
           }
         }
-
-        allGood = false;
-        recommendedBooks.push(...recommendedBooksForGenre);
       }
-    });
+
+      console.log("rrr");
+      recommendedBooksForGenre.forEach((e) => console.log(e.genre));
+
+      recommendedBooks.push(...recommendedBooksForGenre);
+    }
 
     // If there are not enough books for the recommendation shelf
     // based on the selected genres add random books.
-    const remainingBooks = allBooks.filter(book => !recommendedBooks.find(b => book === b));
-    shuffle(remainingBooks);
-    recommendedBooks.push(...remainingBooks.slice(0, numberOfBooksPerGenre - recommendedBooks.length));
+    if (recommendedBooks.length < numberOfBooksPerGenre) {
+      const remainingBooks = allBooks.filter(
+        (book) => !recommendedBooks.find((b) => book === b)
+      );
+      shuffle(remainingBooks);
+      recommendedBooks.push(
+        ...remainingBooks.slice(0, maxNumberOfRecommendedBooks - recommendedBooks.length)
+      );
+    }
 
     res.status(200).send(recommendedBooks);
   } catch (error) {
