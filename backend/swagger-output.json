@@ -36,6 +36,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -60,6 +63,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -99,11 +105,88 @@
             "name": "cover",
             "in": "query",
             "type": "string"
+          },
+          {
+            "name": "favorited",
+            "in": "query",
+            "type": "string"
           }
         ],
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/{userbookshelfId}/{newShelfId}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "userbookshelfId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "newShelfId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/toggleFavorite/{userbookshelfId}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "userbookshelfId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/{userbookshelfId}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "userbookshelfId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"

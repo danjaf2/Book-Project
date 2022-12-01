@@ -27,6 +27,9 @@ module.exports = (sequelize, Sequelize) => {
         key: 'id'
       }
     },
+    favorited: {
+      type: Sequelize.BOOLEAN,
+    },
   });
 
   return UserBookShelf;

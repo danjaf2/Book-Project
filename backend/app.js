@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
   const test1 = await db.sequelize.query('SELECT id, title, author, genre, cover FROM Books');
   const test2 = await db.sequelize.query('SELECT id,name FROM Shelves');
   const test3 = await db.sequelize.query('SELECT username FROM Users');
-  const test4 = await db.sequelize.query('SELECT id, userId, bookId, shelfId FROM UserBookShelves');
+  const test4 = await db.sequelize.query('SELECT id, userId, bookId, shelfId, favorited FROM UserBookShelves');
   console.log(
       JSON.stringify(test1,null,2) +
       JSON.stringify(test2,null,2) + 
@@ -68,26 +68,17 @@ require("./src/routes/user.routes")(app);
 function initial() {
     Shelf.create({
         id: 1,
-        name: "Recommended"
-    });
-
-    Shelf.create({
-        id: 2,
-        name: "Favorites"
-    });
-
-    Shelf.create({
-        id: 3,
         name: "To Read"
     });
 
     Shelf.create({
-        id: 4,
-        name: "Read"
+        id: 2,
+      name: "Reading"
     });
 
     Shelf.create({
-        id: 5,
-        name: "Reading"
+        id: 3,
+        name: "Read"
     });
+
 }
