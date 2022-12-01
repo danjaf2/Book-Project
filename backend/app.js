@@ -82,18 +82,9 @@ function initial() {
       name: "Read",
     },
   ];
-  const shelves = Shelf.findAll();
-  predefinedShelves.forEach((element) => {
-    if (
-      !Shelf.findOne({
-        where: {
-          name: element.name,
-        },
-      })
-    ) {
-      Shelf.create(element);
-    }
-  });
+  // predefinedShelves.forEach((element) => {
+  //   Shelf.create(element);
+  // });
 
   seedBooks.seed();
 }
