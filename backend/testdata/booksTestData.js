@@ -5,6 +5,10 @@ const jsonFile = require("./books.json");
 
 module.exports = {
   seed: function () {
+    if (Books.findOne()) {
+      return;
+    }
+    
     Books.destroy({
         truncate: true
     });
