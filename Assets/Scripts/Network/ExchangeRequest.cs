@@ -100,6 +100,58 @@ public class ExchangeRequest : MonoBehaviour
                 b.setBook();
                 manager.allBooks.Add(b);
             }
+            StartCoroutine(SetBookShelves());
+        }
+
+    }
+
+    IEnumerator SetBookShelves()
+    {
+        UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000/api/UserAllBooks/"+Login.userID.ToString());
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            Debug.Log("Received" + request.downloadHandler.text);
+            var data = JsonConvert.DeserializeObject<List<DataBookInstance>>(request.downloadHandler.text);
+            ShelfManager manager = GameObject.FindObjectOfType<ShelfManager>();
+
+            print(data.Count);
+            foreach(DataBookInstance inst in data)
+            {
+                for (int j = 0; j < manager.allBooks.Count; j++)
+                {
+                    if(inst.bookId== manager.allBooks[j].ID)
+                    {
+                        //To Read
+                        if (inst.shelfId == 1)
+                        {
+                            manager.addBookToToRead(manager.allBooks[j]);
+                        }else if (inst.shelfId == 2) //Reading
+                        {
+                            manager.addBookToReading(manager.allBooks[j]);
+                        }
+                        else //Read
+                        {
+                            manager.addBookToRead(manager.allBooks[j]);
+                        }
+                        if (inst.favorited==1)
+                        {
+                            manager.allBooks[j].Favorite();
+                        }
+                    }
+                }
+            }
+            
         }
     }
 }
+
+
+
+
+

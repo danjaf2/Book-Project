@@ -30,3 +30,24 @@ public class idResponce
 {
     public int id { get; set; }
 }
+
+
+public class DataBookInstance
+{
+    public int id { get; set; }
+
+    public int shelfId { get; set; }
+
+    public int bookId { get; set; }
+
+    public string title { get; set; }
+
+    public string author { get; set; }
+
+    public string genre { get; set; }
+
+    public string cover { get; set; }
+
+    public int favorited { get; set; }
+
+}

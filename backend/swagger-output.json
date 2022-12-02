@@ -76,22 +76,7 @@
             "type": "string"
           },
           {
-            "name": "title",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "author",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "genre",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "cover",
+            "name": "bookId",
             "in": "query",
             "type": "string"
           },
