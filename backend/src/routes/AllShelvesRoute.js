@@ -17,7 +17,7 @@ router.get('/UserAllBooks/:userId', async (req, res) => {
             'WHERE userId = ' + userIdParam +
             ' ORDER BY shelfId, genre');
 
-        res.status(200).send(JSON.stringify(allBooksOfUser, null, 2));
+        res.status(200).send(JSON.stringify(allBooksOfUser[0], null, 2));
     } catch (error) {
         console.log(error)
         res.status(400).send("Error fetching books");
@@ -37,7 +37,7 @@ router.get('/UserShelfBooks/:userId/:shelfId', async (req, res, next) => {
             'WHERE userId = ' + userIdParam + ' AND shelfId = ' + shelfIdParam +
             ' ORDER BY shelfId');
 
-        res.status(200).send(JSON.stringify(allBooksOfShelfOfUser, null, 2));
+        res.status(200).send(JSON.stringify(allBooksOfShelfOfUser[0], null, 2));
     } catch (e) {
         console.log(e)
         res.status(400).send("Error fetching books");
