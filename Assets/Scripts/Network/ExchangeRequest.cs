@@ -164,10 +164,39 @@ public class ExchangeRequest : MonoBehaviour
         StartCoroutine(PutShelfUpdate(url));
     }
 
+    public void RecSelectChange(string [] list)
+    {
+        ChoosenRec r = new ChoosenRec();
+        r.genres = list;
+        string data = JsonConvert.SerializeObject(r);
+        string url = "http://localhost:3000/api/user/" + Login.userID+ "/favoriteGenres";
+        StartCoroutine(PutRecChoice(url, data, list));
+    }
+
     public void ShelfRecommendedChange(Book book, int shelfID)
     {
         string url = string.Format("http://localhost:3000/api/addBook/{0}/{1}?bookId={2}&favorited={3}",shelfID, Login.userID, book.ID, book.favorite.ToString().ToLower());
         StartCoroutine(PostShelfRecUpdate(url));
+    }
+
+    IEnumerator PutRecChoice(string url, string bodyJsonString, string[] list)
+    {
+        var request = new UnityWebRequest(url, "PUT");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        yield return request.SendWebRequest();
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            Debug.Log("Form upload complete!");
+            SendRecommended(list);
+        }
+        Debug.Log("Status Code: " + request.responseCode);
     }
 
     IEnumerator PostShelfRecUpdate(string url)

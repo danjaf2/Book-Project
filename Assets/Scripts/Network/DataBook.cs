@@ -51,3 +51,8 @@ public class DataBookInstance
     public int favorited { get; set; }
 
 }
+
+public class ChoosenRec
+{
+    public string[] genres { get; set; }
+}

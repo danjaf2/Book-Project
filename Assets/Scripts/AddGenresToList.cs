@@ -73,7 +73,9 @@ public class AddGenresToList : MonoBehaviour
                 index++;
             }
         }
-
-        request.SendRecommended(list);
+        if (index == 3 || index == 0)
+        {
+            request.RecSelectChange(list);
+        }
     }
 }
