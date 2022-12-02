@@ -25,6 +25,8 @@ public class AddGenresToList : MonoBehaviour
             toggleList.Add(copy.GetComponent<Toggle>());
             toggleList[i].isOn = false;
         }
+
+        request.RecSelectGet(toggleList);
     }
 
     // Update is called once per frame

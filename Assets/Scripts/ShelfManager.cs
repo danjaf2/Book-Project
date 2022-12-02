@@ -21,15 +21,7 @@ public class ShelfManager : MonoBehaviour
         readingShelf = GameObject.Find("ReadingShelf").GetComponent<Shelf>();
         toReadShelf = GameObject.Find("ToReadShelf").GetComponent<Shelf>();
         readShelf = GameObject.Find("ReadShelf").GetComponent<Shelf>();
-        request = GameObject.FindObjectOfType<ExchangeRequest>();
-
-        request.GetBooks();
-
-
-        print(Login.userID);
-        
-        
-        
+        request = GameObject.FindObjectOfType<ExchangeRequest>();        
 
         
     }

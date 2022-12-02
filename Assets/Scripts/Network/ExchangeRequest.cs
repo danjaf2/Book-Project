@@ -18,14 +18,12 @@ public class ExchangeRequest : MonoBehaviour
     }
 
 
-    public void SendRecommended(string[] array)
+    public void SendRecommended()
     {
         RecData r = new RecData();
-        r.genres = array;
         r.userId = Login.userID;
         string data = JsonConvert.SerializeObject(r);
         StartCoroutine(Post("http://localhost:3000/api/books/recommendations", data));
-
     }
 
     
@@ -102,6 +100,7 @@ public class ExchangeRequest : MonoBehaviour
                 manager.allBooks.Add(b);
             }
             StartCoroutine(SetBookShelves());
+            SendRecommended();
         }
 
     }
@@ -173,6 +172,13 @@ public class ExchangeRequest : MonoBehaviour
         StartCoroutine(PutRecChoice(url, data, list));
     }
 
+
+    public void RecSelectGet(List<Toggle> list)
+    {
+        string url = "http://localhost:3000/api/user/" + Login.userID + "/favoriteGenres";
+        StartCoroutine(GetSelectedRec(url, list));
+    }
+
     public void ShelfRecommendedChange(Book book, int shelfID)
     {
         string url = string.Format("http://localhost:3000/api/addBook/{0}/{1}?bookId={2}&favorited={3}",shelfID, Login.userID, book.ID, book.favorite.ToString().ToLower());
@@ -194,7 +200,7 @@ public class ExchangeRequest : MonoBehaviour
         else
         {
             Debug.Log("Form upload complete!");
-            SendRecommended(list);
+            SendRecommended();
         }
         Debug.Log("Status Code: " + request.responseCode);
     }
@@ -229,6 +235,35 @@ public class ExchangeRequest : MonoBehaviour
             Debug.Log("Form upload complete!");
         }
         Debug.Log("Status Code: " + request.responseCode);
+    }
+
+
+    IEnumerator GetSelectedRec(string url, List<Toggle> list)
+    {
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            Debug.Log("Received" + request.downloadHandler.text);
+            var data = JsonConvert.DeserializeObject<ChoosenRec>(request.downloadHandler.text);
+            foreach (string choice in data.genres)
+            {
+                bool valid = System.Enum.TryParse(choice, out Genre result);
+                if (valid)
+                {
+                    list[(int)result].isOn = true;
+                   
+                }
+               
+            }
+            GetBooks();
+        }
+
     }
 
 }

@@ -60,13 +60,13 @@
     <Compile Include="Assets\UI pack\Scripts\FillValueNumber.cs" />
     <Compile Include="Assets\Scripts\HeartButton.cs" />
     <Compile Include="Assets\Scripts\Book.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\NetworkLogin.cs" />
     <Compile Include="Assets\Scripts\Button.cs" />
     <Compile Include="Assets\Scripts\Network\DataBook.cs" />
     <Compile Include="Assets\Scripts\AddGenresToList.cs" />
     <Compile Include="Assets\Scripts\MainMenu\Login.cs" />
     <Compile Include="Assets\Scripts\BookDisplay.cs" />
     <Compile Include="Assets\Scripts\MouseControl.cs" />
-    <Compile Include="Assets\Scripts\MainMenu\NetworkLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

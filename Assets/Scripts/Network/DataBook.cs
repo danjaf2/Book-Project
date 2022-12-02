@@ -16,7 +16,6 @@ public class DataBook
 
 public class RecData
 {
-    public string[] genres { get; set; }
     public int userId { get; set; }
 }
 
