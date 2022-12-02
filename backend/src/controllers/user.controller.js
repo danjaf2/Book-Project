@@ -4,7 +4,7 @@ const UserGenres = db.userGenres;
 
 exports.saveUserFavoriteGenres = async (req, res) => {
   try {
-    const genres = req.body;
+    const genres = req.body.genres;
     const userId = req.params.userId;
 
     await UserGenres.destroy({

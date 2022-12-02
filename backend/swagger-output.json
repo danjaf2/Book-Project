@@ -308,7 +308,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "length": {
+                "genres": {
                   "example": "any"
                 }
               }
