@@ -9,6 +9,7 @@ const app = express();
 const port = 3000;
 
 const AllShelvesRoute = require("./src/routes/AllShelvesRoute");
+const booksRoute = require("./src/routes/booksRoute");
 
 app.use(cors());
 
@@ -40,19 +41,19 @@ const Shelf = db.shelf;
 // });
 
 // debug only
-(async () => {
-  // const test1 = await db.sequelize.query('SELECT id, title, author, genre, cover FROM Books');
-  const test2 = await db.sequelize.query('SELECT id,name FROM Shelves');
-  const test3 = await db.sequelize.query('SELECT username FROM Users');
-  const test4 = await db.sequelize.query('SELECT id, userId, bookId, shelfId, favorited FROM UserBookShelves');
+// (async () => {
+//   const test1 = await db.sequelize.query('SELECT id, title, author, genre, cover FROM Books');
+//   const test2 = await db.sequelize.query('SELECT id,name FROM Shelves');
+//   const test3 = await db.sequelize.query('SELECT username FROM Users');
+//   const test4 = await db.sequelize.query('SELECT id, userId, bookId, shelfId, favorited FROM UserBookShelves');
 
-  console.log(
-    // JSON.stringify(test1, null, 2) +
-      JSON.stringify(test2, null, 2) +
-      JSON.stringify(test3, null, 2) +
-      JSON.stringify(test4, null, 2)
-  );
-})();
+//   console.log(
+//     JSON.stringify(test1, null, 2) +
+//       JSON.stringify(test2, null, 2) +
+//       JSON.stringify(test3, null, 2) +
+//       JSON.stringify(test4, null, 2)
+//   );
+// })();
 
 app.listen(port, () => {
   console.log(
@@ -62,6 +63,7 @@ app.listen(port, () => {
 
 // Shelf routes
 app.use("/api", AllShelvesRoute);
+app.use("/api", booksRoute);
 
 require("./src/routes/auth.routes")(app);
 require("./src/routes/user.routes")(app);
