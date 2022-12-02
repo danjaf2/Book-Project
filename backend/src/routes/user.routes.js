@@ -11,4 +11,9 @@ module.exports = function (app) {
     "/api/user/:userId/favoriteGenres",
     controller.saveUserFavoriteGenres
   );
+
+  app.get(
+    "/api/user/:userId/favoriteGenres",
+    controller.getUserFavoriteGenres
+  );
 };

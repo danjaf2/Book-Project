@@ -24,3 +24,20 @@ exports.saveUserFavoriteGenres = async (req, res) => {
     res.status(400).send("Error in updating user's favorite genres.");
   }
 };
+
+exports.getUserFavoriteGenres = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const allUserGenresOfUser = await UserGenres.findAll({
+      where: { userId: userId }
+    });
+
+    res.status(200).send({
+      genres: allUserGenresOfUser.map(e => e.genre)
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("Error in updating user's favorite genres.");
+  }
+};
