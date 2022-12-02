@@ -106,6 +106,8 @@ public class ShelfManager : MonoBehaviour
                 Book b = favShelf.books[i];
                 b.favorite = false;
                 favShelf.books.Remove(b);
+                
+                //request.FavoriteChange(book);
                 b.transform.position = new Vector3(1000000f, 0f, 0f);
             }
         }
@@ -144,6 +146,10 @@ public class ShelfManager : MonoBehaviour
     public void addBookToReading(Book book)
     {
         Shelf currentShelf = findCurrentShelf(book);
+        if (currentShelf == recShelf)
+        {
+            request.ShelfRecommendedChange(book, 2);
+        }
         if (currentShelf == favShelf)
         {
             for (int i = 0; i < allBooks.Count; i++)
@@ -159,6 +165,7 @@ public class ShelfManager : MonoBehaviour
                         shelf.books.Remove(allBooks[i]);
                         print("HERE");
                         readingShelf.books.Add(allBooks[i]);
+                        request.ShelfChange(allBooks[i], 2);
                         return;
                     }
                 }
@@ -166,10 +173,14 @@ public class ShelfManager : MonoBehaviour
         }
         if (currentShelf != readingShelf)
         {
-            currentShelf.currentIndex = 0;
-            currentShelf.books.Remove(book);
+            if (currentShelf != null)
+            {
+                currentShelf.currentIndex = 0;
+                currentShelf.books.Remove(book);
+            }
             print("Added");
             readingShelf.books.Add(book);
+            request.ShelfChange(book, 2);
         }
         else
         {
@@ -181,6 +192,10 @@ public class ShelfManager : MonoBehaviour
     public void addBookToToRead(Book book)
     {
         Shelf currentShelf = findCurrentShelf(book);
+        if (currentShelf == recShelf)
+        {
+            request.ShelfRecommendedChange(book, 1);
+        }
         if (currentShelf == favShelf)
         {
             for (int i = 0; i < allBooks.Count; i++)
@@ -196,6 +211,7 @@ public class ShelfManager : MonoBehaviour
                         shelf.books.Remove(allBooks[i]);
                         print("HERE");
                         toReadShelf.books.Add(allBooks[i]);
+                        request.ShelfChange(allBooks[i], 1);
                         return;
                     }
                 }
@@ -203,9 +219,13 @@ public class ShelfManager : MonoBehaviour
         }
         if (currentShelf != toReadShelf)
         {
-            currentShelf.currentIndex = 0;
-            currentShelf.books.Remove(book);
+            if (currentShelf != null)
+            {
+                currentShelf.currentIndex = 0;
+                currentShelf.books.Remove(book);
+            }
             toReadShelf.books.Add(book);
+            request.ShelfChange(book, 1);
         }
         else
         {
@@ -217,6 +237,10 @@ public class ShelfManager : MonoBehaviour
     public void addBookToRead(Book book)
     {
         Shelf currentShelf = findCurrentShelf(book);
+        if (currentShelf == recShelf)
+        {
+            request.ShelfRecommendedChange(book, 3);
+        }
         if (currentShelf == favShelf)
         {
             for (int i = 0; i < allBooks.Count; i++)
@@ -232,6 +256,7 @@ public class ShelfManager : MonoBehaviour
                         shelf.books.Remove(allBooks[i]);
                         print("HERE");
                         readShelf.books.Add(allBooks[i]);
+                        request.ShelfChange(allBooks[i], 3);
                         return;
                     }
                 }
@@ -239,9 +264,13 @@ public class ShelfManager : MonoBehaviour
         }
         if (currentShelf != readShelf)
         {
-            currentShelf.currentIndex = 0;
-            currentShelf.books.Remove(book);
+            if (currentShelf != null)
+            {
+                currentShelf.currentIndex = 0;
+                currentShelf.books.Remove(book);
+            }
             readShelf.books.Add(book);
+            request.ShelfChange(book, 3);
         }
         else
         {

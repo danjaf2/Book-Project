@@ -97,6 +97,7 @@ public class ExchangeRequest : MonoBehaviour
 
                 Book b = Instantiate(prefab);
                 b.book = bookData;
+                b.userBookShelfID = -1;
                 b.setBook();
                 manager.allBooks.Add(b);
             }
@@ -127,6 +128,7 @@ public class ExchangeRequest : MonoBehaviour
                 {
                     if(inst.bookId== manager.allBooks[j].ID)
                     {
+                        manager.allBooks[j].userBookShelfID = inst.id;
                         //To Read
                         if (inst.shelfId == 1)
                         {
@@ -141,7 +143,7 @@ public class ExchangeRequest : MonoBehaviour
                         }
                         if (inst.favorited==1)
                         {
-                            manager.allBooks[j].Favorite();
+                            manager.allBooks[j].FavoriteLoad();
                         }
                     }
                 }
@@ -149,6 +151,57 @@ public class ExchangeRequest : MonoBehaviour
             
         }
     }
+
+    public void ShelfChange(Book book, int shelfID)
+    {
+        string url = "http://localhost:3000/api/moveBook/"+book.userBookShelfID.ToString() + "/" + shelfID;
+        StartCoroutine(PutShelfUpdate(url));
+    }
+
+    public void FavoriteChange(Book book)
+    {
+        string url = "http://localhost:3000/api/toggleFavorite/" + book.userBookShelfID.ToString();
+        StartCoroutine(PutShelfUpdate(url));
+    }
+
+    public void ShelfRecommendedChange(Book book, int shelfID)
+    {
+        string url = string.Format("http://localhost:3000/api/addBook/{0}/{1}?bookId={2}&favorited={3}",shelfID, Login.userID, book.ID, book.favorite.ToString().ToLower());
+        StartCoroutine(PostShelfRecUpdate(url));
+    }
+
+    IEnumerator PostShelfRecUpdate(string url)
+    {
+        var request = new UnityWebRequest(url, "POST");
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        yield return request.SendWebRequest();
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            Debug.Log("Form upload complete!");
+        }
+        Debug.Log("Status Code: " + request.responseCode);
+    }
+
+    IEnumerator PutShelfUpdate(string url)
+    {
+        var request = new UnityWebRequest(url, "PUT");
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        yield return request.SendWebRequest();
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            Debug.Log("Form upload complete!");
+        }
+        Debug.Log("Status Code: " + request.responseCode);
+    }
+
 }
 
 

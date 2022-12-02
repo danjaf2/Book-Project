@@ -21,6 +21,9 @@ public class Book : MonoBehaviour
     public GameObject heart;
     public ShelfManager manager;
     public int ID;
+    public int userBookShelfID;
+
+    public ExchangeRequest request;
 
     private float targetHeight =1f;
     // Start is called before the first frame update
@@ -30,7 +33,8 @@ public class Book : MonoBehaviour
         heart = this.transform.GetChild(0).GetChild(0).gameObject;
         heart.SetActive(false);
         manager = GameObject.FindObjectOfType<ShelfManager>();
-        
+        request = GameObject.FindObjectOfType<ExchangeRequest>();
+
     }
 
     public void setBook()
@@ -76,7 +80,25 @@ public class Book : MonoBehaviour
         else
         {
             manager.addBookToFav(this);
-            
+
+        }
+        request.FavoriteChange(this);
+    }
+
+    public void FavoriteLoad()
+    {
+        if (!favorite)
+        {
+            favorite = true;
+            Book copy = Instantiate(this);
+            copy.favorite = true;
+            copy.ID = this.ID;
+            manager.addBookToFav(copy);
+        }
+        else
+        {
+            manager.addBookToFav(this);
+
         }
     }
 }
