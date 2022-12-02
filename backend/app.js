@@ -36,9 +36,9 @@ db.sequelize.sync().then(() => {
 
 const Shelf = db.shelf;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello World!");
+// });
 
 // debug only
 // (async () => {
@@ -83,9 +83,15 @@ function initial() {
       name: "Read",
     },
   ];
-  // predefinedShelves.forEach((element) => {
-  //   Shelf.create(element);
-  // });
+
+  // const shelves = Shelf.findAll();
+  
+  predefinedShelves.forEach(async (element) => {
+    const found = await Shelf.findOne({ where: { name: element.name, } });
+    if(!found) {
+      await Shelf.create(element);
+    }
+  });
 
   seedBooks.seed();
 }
