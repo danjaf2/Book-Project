@@ -10,22 +10,19 @@ public class Login : MonoBehaviour
     public TMP_InputField email;
     public TMP_InputField password;
 
-    //Temp values
-    private string emailC = "user@user.ca";
-    private string passwordC = "password";
+    public static int userID=-1;
+
+   
     // Start is called before the first frame update
     public void buttonPressed()
     {
+        userID = -1;
         print(email.text);
         print(password.text);
+        NetworkLogin nl = this.gameObject.GetComponent<NetworkLogin>();
+        nl.CheckLogin(email.text, password.text);
 
-        if (email.text == emailC && password.text == passwordC)
-        {
-            SceneManager.LoadScene(1);
-        }
-        else
-        {
-            print("Invalid Input");
-        }
+        
+        
     }
 }

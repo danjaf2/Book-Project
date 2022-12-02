@@ -10,6 +10,7 @@ public class ShelfManager : MonoBehaviour
     public Shelf readingShelf;
     public Shelf toReadShelf;
     public Shelf readShelf;
+    public ExchangeRequest request;
 
     public Book prefab;
     // Start is called before the first frame update
@@ -20,9 +21,12 @@ public class ShelfManager : MonoBehaviour
         readingShelf = GameObject.Find("ReadingShelf").GetComponent<Shelf>();
         toReadShelf = GameObject.Find("ToReadShelf").GetComponent<Shelf>();
         readShelf = GameObject.Find("ReadShelf").GetComponent<Shelf>();
+        request = GameObject.FindObjectOfType<ExchangeRequest>();
+
+        request.GetBooks();
 
 
-
+        print(Login.userID);
         
         
         
@@ -50,6 +54,7 @@ public class ShelfManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         foreach (Book book in allBooks)
         {
             if (!favShelf.books.Contains(book))
@@ -61,6 +66,9 @@ public class ShelfManager : MonoBehaviour
                 }
             }
         }
+        */
+
+
         
     }
 

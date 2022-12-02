@@ -9,11 +9,13 @@ public class AddGenresToList : MonoBehaviour
     public GameObject itemTemplate;
     public GameObject content;
     public List<Toggle> toggleList;
+    public ExchangeRequest request;
 
     int amountOfGenres = 10;
     // Start is called before the first frame update
     void Start()
     {
+        request = GameObject.FindObjectOfType<ExchangeRequest>();
         for (int i = 0; i < amountOfGenres; i++)
         {
             var copy = Instantiate(itemTemplate);
@@ -60,9 +62,18 @@ public class AddGenresToList : MonoBehaviour
 
     public void Submit()
     {
+        string []list= new string[3];
+        int index = 0;
         //Send data
+        for (int i = 0; i < toggleList.Count; i++)
+        {
+            if (toggleList[i].isOn)
+            {
+                list[index] = ((Genre)i).ToString();
+                index++;
+            }
+        }
 
-
-        this.gameObject.SetActive(false);
+        request.SendRecommended(list);
     }
 }

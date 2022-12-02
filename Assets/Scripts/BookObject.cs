@@ -6,6 +6,7 @@ using static Book;
 [CreateAssetMenu(fileName ="New Book", menuName = "Book")]
 public class BookObject : ScriptableObject
 {
+    public int id;
     public string name;
     public string author;
     public Genre genre;

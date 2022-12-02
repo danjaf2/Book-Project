@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using static Book;
 public class DataBook
 {
     public int id { get; set; }
@@ -11,4 +12,21 @@ public class DataBook
 
     public string cover { get; set; }
 
+}
+
+public class RecData
+{
+    public string[] genres { get; set; }
+    public int userId { get; set; }
+}
+
+public class loginInfo
+{
+    public string username { get; set; }
+    public string password { get; set; }
+}
+
+public class idResponce
+{
+    public int id { get; set; }
 }

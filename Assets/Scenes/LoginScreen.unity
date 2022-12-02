@@ -654,6 +654,7 @@ GameObject:
   - component: {fileID: 531630228}
   - component: {fileID: 531630227}
   - component: {fileID: 531630229}
+  - component: {fileID: 531630230}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -736,6 +737,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   email: {fileID: 749859888}
   password: {fileID: 1315763952}
+--- !u!114 &531630230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531630225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a91b905c64f7da478f8cd56157f470e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &669518257
 GameObject:
   m_ObjectHideFlags: 0

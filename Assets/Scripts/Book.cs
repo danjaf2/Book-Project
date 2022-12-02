@@ -12,10 +12,10 @@ public class Book : MonoBehaviour
         History, Fiction, Fantasy, Mystery, Poetry, Romance, NonFiction, Children, YoungAdult, Comics
     }
     Color[] colors = { Color.green, Color.magenta, Color.cyan, Color.gray, Color.yellow, Color.red, Color.white, new Color32(255, 192, 203, 1), Color.black, new Color32(254, 161, 0, 1) };
-    [System.NonSerialized]
+    
     public Genre genre;
     public string author;
-    [System.NonSerialized]
+    
     public Sprite image;
     public bool favorite;
     public GameObject heart;
@@ -38,6 +38,7 @@ public class Book : MonoBehaviour
         name = book.name;
         genre = book.genre;
         author = book.author;
+        ID = book.id;
         var rect = new Rect(0, 0, book.image.width, book.image.height);
         var sprite = Sprite.Create(book.image, rect, new Vector2(0.5f, 0.5f));
         image = sprite;
