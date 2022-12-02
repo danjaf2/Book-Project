@@ -10,6 +10,8 @@ public class ShelfManager : MonoBehaviour
     public Shelf readingShelf;
     public Shelf toReadShelf;
     public Shelf readShelf;
+
+    public Book prefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,25 +20,31 @@ public class ShelfManager : MonoBehaviour
         readingShelf = GameObject.Find("ReadingShelf").GetComponent<Shelf>();
         toReadShelf = GameObject.Find("ToReadShelf").GetComponent<Shelf>();
         readShelf = GameObject.Find("ReadShelf").GetComponent<Shelf>();
-        var list = FindObjectsOfType<Book>();
 
 
-        //Ressource Loading example
-        /*
-        BookObject obj = BookObject.CreateInstance("BookObject") as BookObject;
-        obj.genre = Book.Genre.Dark;
-        obj.name = "Jerry";
-        var texture = Resources.Load<Sprite>("BookCovers/Cover3");
-        obj.image = texture;
-        list[0].book = obj;
-        list[0].setBook();
-        */
 
-        for (int i = 0; i < list.Length; i++)
+        
+        
+        
+
+        
+    }
+
+    public static Texture2D textureFromSprite(Sprite sprite)
+    {
+        if (sprite.rect.width != sprite.texture.width)
         {
-            allBooks.Add(list[i]);
-            allBooks[i].ID = i;
+            Texture2D newText = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
+            Color[] newColors = sprite.texture.GetPixels((int)sprite.textureRect.x,
+                                                         (int)sprite.textureRect.y,
+                                                         (int)sprite.textureRect.width,
+                                                         (int)sprite.textureRect.height);
+            newText.SetPixels(newColors);
+            newText.Apply();
+            return newText;
         }
+        else
+            return sprite.texture;
     }
 
     // Update is called once per frame
