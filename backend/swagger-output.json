@@ -178,9 +178,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "genres": {
-                  "example": "any"
-                },
                 "userId": {
                   "example": "any"
                 }
@@ -295,30 +292,35 @@
         }
       }
     },
-    "/api/test/all": {
-      "get": {
+    "/api/user/{userId}/favoriteGenres": {
+      "put": {
         "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "length": {
+                  "example": "any"
+                }
+              }
+            }
           }
-        }
-      }
-    },
-    "/api/test/user": {
-      "get": {
-        "description": "",
-        "parameters": [],
+        ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }

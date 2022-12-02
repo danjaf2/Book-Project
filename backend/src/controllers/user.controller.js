@@ -1,15 +1,26 @@
-exports.allAccess = (req, res) => {
-    res.status(200).send("Public Content.");
-  };
-  
-  exports.userBoard = (req, res) => {
-    res.status(200).send("User Content.");
-  };
-  
-  exports.adminBoard = (req, res) => {
-    res.status(200).send("Admin Content.");
-  };
-  
-  exports.moderatorBoard = (req, res) => {
-    res.status(200).send("Moderator Content.");
-  };
+const db = require("../models");
+const config = require("../config/auth.config");
+const UserGenres = db.userGenres;
+
+exports.saveUserFavoriteGenres = async (req, res) => {
+  try {
+    const genres = req.body;
+    const userId = req.params.userId;
+
+    await UserGenres.destroy({
+      where: { userId: userId }
+    });
+
+    for (let i = 0; i < genres.length; i++) {
+      const genre = genres[i];
+      await UserGenres.create({
+        userId: userId,
+        genre: genre,
+      });
+    }
+    res.status(200).send("Updated user's favorite genres");
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("Error in updating user's favorite genres.");
+  }
+};

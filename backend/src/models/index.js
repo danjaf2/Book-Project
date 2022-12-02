@@ -26,7 +26,7 @@ db.user = require("./user.model.js")(sequelize, Sequelize);
 db.book = require("./book.model.js")(sequelize, Sequelize);
 db.shelf = require("./shelf.model.js")(sequelize, Sequelize);
 db.userBookShelf = require("./userBookShelf.model.js")(sequelize, Sequelize);
-
 db.userBookShelf.belongsTo(db.book);
+db.userGenres = require("./userGenres.model.js")(sequelize, Sequelize);
 
 module.exports = db;

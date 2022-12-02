@@ -3,19 +3,27 @@ const app = express();
 const db = require("../models");
 const controller = require("../controllers/book.controller");
 const UserBookShelfdb = db.userBookShelf;
+const UserGenres = db.userGenres;
 const Booksdb = db.book;
 const router = express.Router();
 
 const maxNumberOfRecommendedBooks = 20;
 
-// Get book recommendations based on the selected genres
+// Get book recommendations based on the user's favorite genres.
 // The recommendation implementation is to select a certain number of books
 // of the selected genres, and limit the total amount of books to around 20.
 router.post("/books/recommendations", async (req, res) => {
   // req: {"genres": [array of genres], "userId": <id>}
-  const genres = req.body.genres;
   const userId = req.body.userId;
+
   try {
+    const userGenres = await UserGenres.findAll({
+      where: {
+        userId: userId,
+      },
+      attribute: [ "genre" ]
+    });
+    const genres = userGenres.map(e => e.genre);
     const allBooksGenres = [];
     const allBooks = await Booksdb.findAll({
       attributes: ["id", "title", "author", "genre", "cover"],
@@ -31,7 +39,9 @@ router.post("/books/recommendations", async (req, res) => {
     };
 
     // Based on the number of books per genre
-    const numberOfBooksPerGenre = Math.floor(maxNumberOfRecommendedBooks / genres.length);
+    const numberOfBooksPerGenre = Math.floor(
+      maxNumberOfRecommendedBooks / genres.length
+    );
     const recommendedBooks = [];
     for (let i = 0; i < allBooksGenres.length; i++) {
       const books = allBooksGenres[i];
@@ -75,7 +85,10 @@ router.post("/books/recommendations", async (req, res) => {
       );
       shuffle(remainingBooks);
       recommendedBooks.push(
-        ...remainingBooks.slice(0, maxNumberOfRecommendedBooks - recommendedBooks.length)
+        ...remainingBooks.slice(
+          0,
+          maxNumberOfRecommendedBooks - recommendedBooks.length
+        )
       );
     }
 
