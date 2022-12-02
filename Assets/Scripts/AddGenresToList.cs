@@ -10,7 +10,7 @@ public class AddGenresToList : MonoBehaviour
     public GameObject content;
     public List<Toggle> toggleList;
 
-    int amountOfGenres = 11;
+    int amountOfGenres = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +28,41 @@ public class AddGenresToList : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        int count=0;
+        for(int i=0;i< toggleList.Count;i++)
+        {
+            if (toggleList[i].isOn)
+            {
+                count++;
+                print(((Genre)i).ToString());
+            }
+        }
+
+        if (count >= 3)
+        {
+            for (int i = 0; i < toggleList.Count; i++)
+            {
+                if (!toggleList[i].isOn)
+                {
+                    toggleList[i].interactable = false;
+                }
+            }
+        }
+        if (count < 3)
+        {
+            for (int i = 0; i < toggleList.Count; i++)
+            {
+                toggleList[i].interactable = true;
+            }
+        }
+    }
+
+
+    public void Submit()
+    {
+        //Send data
+
+
+        this.gameObject.SetActive(false);
     }
 }
