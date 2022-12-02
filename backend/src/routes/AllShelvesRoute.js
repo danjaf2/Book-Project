@@ -46,19 +46,17 @@ router.get('/UserShelfBooks/:userId/:shelfId', async (req, res, next) => {
 })
 
 /**
- * Add a new or preexisting book to this user's shelf
+ * Add a new or preexisting book to this user's shelf 
  */
 router.post('/addBook/:shelfId/:userId', async (req, res) => {
     const shelfIdParam = req.params.shelfId;
     const userIdParam = req.params.userId;
-    const { title, author, genre, cover, favorited } = req.query;
+    const { bookId, favorited } = req.query;
 
     try {
-        // Find if book already exists in Books table, if not then create it 
-        let bookRef = await Booksdb.findOne({ where: { title: title } });
-        if (bookRef == null) {
-            bookRef = await Booksdb.create({ title, author, genre, cover });
-        }
+        // Find if book already exists in Books table
+        let bookRef = await Booksdb.findOne({ where: { id: bookId } });
+        if (bookRef == null) { res.status(400).send('Error in creating book.') }
 
         // Link book to user in userBookShelf table
         await UserBookShelfdb.create({
@@ -76,7 +74,7 @@ router.post('/addBook/:shelfId/:userId', async (req, res) => {
 })
 
 // Move a book into a new shelf
-router.put('/:userbookshelfId/:newShelfId', async (req, res) => {
+router.put('/moveBook/:userbookshelfId/:newShelfId', async (req, res) => {
 
     const userbookshelfId = req.params.userbookshelfId;
     const newShelfId = req.params.newShelfId;
@@ -96,17 +94,17 @@ router.put('/:userbookshelfId/:newShelfId', async (req, res) => {
 // Toggle a book as favorite
 router.put('/toggleFavorite/:userbookshelfId', async (req, res) => {
     const userbookshelfId = req.params.userbookshelfId;
-
+    
     try {
         let entryRef = await UserBookShelfdb.findOne({ where: { id: userbookshelfId } });
         if (entryRef == null) { res.status(404).send('book shelf id not found!'); }
 
-        const favoriteBook = await UserBookShelfdb.update(
-            { favorited: !entryRef.favorited },
+        await UserBookShelfdb.update(
+            { favorited: !Boolean(entryRef.favorited) },
             { where: { id: userbookshelfId } }
         );
 
-        res.status(200).send(JSON.stringify(favoriteBook, null, 2));
+        res.status(200).send('Book favorited.');
     } catch (error) {
         console.log(error);
         res.status(400).send('Error in favoriting book.')

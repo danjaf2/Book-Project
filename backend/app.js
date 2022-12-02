@@ -35,19 +35,19 @@ db.sequelize.sync().then(() => {
 
 const Shelf = db.shelf;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello World!");
+// });
 
 // debug only
 (async () => {
-  const test1 = await db.sequelize.query('SELECT id, title, author, genre, cover FROM Books');
+  // const test1 = await db.sequelize.query('SELECT id, title, author, genre, cover FROM Books');
   const test2 = await db.sequelize.query('SELECT id,name FROM Shelves');
   const test3 = await db.sequelize.query('SELECT username FROM Users');
   const test4 = await db.sequelize.query('SELECT id, userId, bookId, shelfId, favorited FROM UserBookShelves');
 
   console.log(
-    JSON.stringify(test1, null, 2) +
+    // JSON.stringify(test1, null, 2) +
       JSON.stringify(test2, null, 2) +
       JSON.stringify(test3, null, 2) +
       JSON.stringify(test4, null, 2)
@@ -81,16 +81,13 @@ function initial() {
       name: "Read",
     },
   ];
-  const shelves = Shelf.findAll();
-  predefinedShelves.forEach((element) => {
-    if (
-      !Shelf.findOne({
-        where: {
-          name: element.name,
-        },
-      })
-    ) {
-      Shelf.create(element);
+
+  // const shelves = Shelf.findAll();
+  
+  predefinedShelves.forEach(async (element) => {
+    const found = await Shelf.findOne({ where: { name: element.name, } });
+    if(!found) {
+      await Shelf.create(element);
     }
   });
 
