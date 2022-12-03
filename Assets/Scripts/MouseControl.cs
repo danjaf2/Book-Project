@@ -70,7 +70,7 @@ public class MouseControl : MonoBehaviour
         Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray2, out hovered, 20f))
         {
-            if (hovered.collider.tag == "Book")
+            if (hovered.collider.tag == "Book"&&hovered.transform.position.z != 3.37f)
             {
                 if (previousHovered == null)
                 {
