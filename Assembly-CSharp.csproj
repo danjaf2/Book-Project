@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\BookObject.cs" />
     <Compile Include="Assets\UI pack\Scripts\FillValueNumber.cs" />
     <Compile Include="Assets\Scripts\HeartButton.cs" />
+    <Compile Include="Assets\Logout.cs" />
     <Compile Include="Assets\Scripts\Book.cs" />
     <Compile Include="Assets\Scripts\MainMenu\NetworkLogin.cs" />
     <Compile Include="Assets\Scripts\Button.cs" />
