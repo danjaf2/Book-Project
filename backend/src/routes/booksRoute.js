@@ -9,6 +9,10 @@ const router = express.Router();
 
 const maxNumberOfRecommendedBooks = 20;
 
+const print = (i) => {
+  console.log(i);
+};
+
 // Get book recommendations based on the user's favorite genres.
 // The recommendation implementation is to select a certain number of books
 // of the selected genres, and limit the total amount of books to around 20.
@@ -21,18 +25,21 @@ router.post("/books/recommendations", async (req, res) => {
       where: {
         userId: userId,
       },
-      attribute: [ "genre" ]
+      attribute: ["genre"],
     });
-    const genres = userGenres.map(e => e.genre);
+    const genres = userGenres.map((e) => e.genre);
     const allBooksGenres = [];
     const allBooks = await Booksdb.findAll({
       attributes: ["id", "title", "author", "genre", "cover"],
     });
 
-    await genres.forEach(async (g) => {
-      const allBooksOfGenre = await allBooks.filter((book) => book.genre === g);
+    print(genres);
+    for (let i = 0; i < genres.length; i++) {
+      const allBooksOfGenre = allBooks.filter(
+        (book) => book.genre === genres[i]
+      );
       allBooksGenres.push(allBooksOfGenre);
-    });
+    }
 
     const shuffle = (array) => {
       return array.sort(() => 0.5 - Math.random());
@@ -42,39 +49,30 @@ router.post("/books/recommendations", async (req, res) => {
     const numberOfBooksPerGenre = Math.floor(
       maxNumberOfRecommendedBooks / genres.length
     );
+
     const recommendedBooks = [];
     for (let i = 0; i < allBooksGenres.length; i++) {
       const books = allBooksGenres[i];
-
-      let recommendedBooksForGenre = [];
-      let allGood = true;
 
       // Shuffle the books array of the current genre
       // and take some numberOfBooksPerGenre number of books.
       // If the user already has a book that is in one of their shelves,
       // restart the process until all books are not in neither of their shelves.
-      while (allGood) {
-        allGood = false;
-
-        console.log(books.filter((b) => b.genre == "History").length);
-        shuffle(books);
-        recommendedBooksForGenre = books.slice(0, numberOfBooksPerGenre);
-        for (let i = 0; i < recommendedBooksForGenre.length; i++) {
-          const userBookShelf = await UserBookShelfdb.findOne({
-            where: { userId: userId, bookId: recommendedBooksForGenre[i].id },
-          });
-          if (userBookShelf) {
-            allGood = true;
-            recommendedBooksForGenre = [];
-            break;
-          }
+      shuffle(books);
+      const booksToGiveForGenre = [];
+      for (let i = 0; i < books.length; i++) {
+        const userBookShelf = await UserBookShelfdb.findOne({
+          where: { userId: userId, bookId: books[i].id },
+        });
+        if (!userBookShelf) {
+          booksToGiveForGenre.push(books[i]);
         }
+
+        if (booksToGiveForGenre.length == numberOfBooksPerGenre)
+            break;
       }
 
-      console.log("rrr");
-      recommendedBooksForGenre.forEach((e) => console.log(e.genre));
-
-      recommendedBooks.push(...recommendedBooksForGenre);
+      recommendedBooks.push(...booksToGiveForGenre);
     }
 
     // If there are not enough books for the recommendation shelf
@@ -83,14 +81,24 @@ router.post("/books/recommendations", async (req, res) => {
       const remainingBooks = allBooks.filter(
         (book) => !recommendedBooks.find((b) => book === b)
       );
+
       shuffle(remainingBooks);
-      recommendedBooks.push(
-        ...remainingBooks.slice(
-          0,
-          maxNumberOfRecommendedBooks - recommendedBooks.length
-        )
-      );
+      while (maxNumberOfRecommendedBooks - recommendedBooks.length != 0) {
+        const book = remainingBooks[i];
+        i++;
+        if (
+          await UserBookShelfdb.findOne({
+            where: { bookId: book.id },
+          })
+        ) {
+          continue;
+        } else {
+          recommendedBooks.push(book);
+        }
+      }
     }
+
+    console.log(recommendedBooks.length);
 
     res.status(200).send(recommendedBooks);
   } catch (error) {

@@ -93,5 +93,6 @@ function initial() {
     }
   });
 
-  // seedBooks.seed();
+  seedBooks.seed();
+  // seedBooks.seedUserBookShelves();
 }
