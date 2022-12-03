@@ -58,14 +58,16 @@ router.post('/addBook/:shelfId/:userId', async (req, res) => {
         if (bookRef == null) { res.status(400).send('Error in creating book.') }
 
         // Link book to user in userBookShelf table
-        await UserBookShelfdb.create({
+        const newUserBookShelf = await UserBookShelfdb.create({
             userId: userIdParam,
             shelfId: shelfIdParam,
             bookId: bookRef.id,
             favorited
-        })
+        });
 
-        res.status(201).send('Book created successfully.')
+        res.status(200).send({
+            id: newUserBookShelf.id
+        });
     } catch (error) {
         console.log(error)
         res.status(400).send('Error in creating book.')

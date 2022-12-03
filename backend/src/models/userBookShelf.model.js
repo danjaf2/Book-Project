@@ -4,7 +4,8 @@ module.exports = (sequelize, Sequelize) => {
   const UserBookShelf = sequelize.define("userBookShelf", {
     id: {
       type: Sequelize.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     userId: {
       type: Sequelize.INTEGER,
