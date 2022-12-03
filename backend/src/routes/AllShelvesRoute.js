@@ -96,7 +96,10 @@ router.put('/toggleFavorite/:userbookshelfId', async (req, res) => {
     
     try {
         let entryRef = await UserBookShelfdb.findOne({ where: { id: userbookshelfId } });
-        if (entryRef == null) { res.status(404).send('book shelf id not found!'); }
+        if (entryRef == null) { 
+            res.status(404).send('book shelf id not found!');
+            return;
+        }
 
         await UserBookShelfdb.update(
             { favorited: !Boolean(entryRef.favorited) },
