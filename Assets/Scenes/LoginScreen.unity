@@ -781,10 +781,10 @@ RectTransform:
   m_Father: {fileID: 531630226}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0034176162, y: 0.47941318}
-  m_AnchorMax: {x: 0.5, y: 0.596}
-  m_AnchoredPosition: {x: 14, y: 0.9965}
-  m_SizeDelta: {x: -0.6799927, y: -1.9929962}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 173, y: 11.9965}
+  m_SizeDelta: {x: 313.32, y: 32.007004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &669518259
 MonoBehaviour:
@@ -1096,10 +1096,10 @@ RectTransform:
   m_Father: {fileID: 531630226}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0034176162, y: 0.66800004}
-  m_AnchorMax: {x: 0.7617472, y: 0.7845689}
-  m_AnchoredPosition: {x: -35.9039, y: 0.69999695}
-  m_SizeDelta: {x: -72.8078, y: -4}
+  m_AnchorMin: {x: 0, y: 0.7571557}
+  m_AnchorMax: {x: 0, y: 0.7571557}
+  m_AnchoredPosition: {x: 205.5961, y: -8.300003}
+  m_SizeDelta: {x: 406.1922, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &749859888
 MonoBehaviour:
@@ -1699,10 +1699,10 @@ RectTransform:
   m_Father: {fileID: 531630226}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0034176162, y: 0.37656888}
-  m_AnchorMax: {x: 0.768, y: 0.47941318}
-  m_AnchoredPosition: {x: -37.9039, y: 2.9000015}
-  m_SizeDelta: {x: -76.8078, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 205.5961, y: -18.099998}
+  m_SizeDelta: {x: 406.1922, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1315763952
 MonoBehaviour:
@@ -1918,7 +1918,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Email
+  m_text: Username
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccce6832cc8123b44a15ee37995b2a5f, type: 2}
   m_sharedMaterial: {fileID: -8013571037244294360, guid: ccce6832cc8123b44a15ee37995b2a5f, type: 2}
@@ -2027,10 +2027,10 @@ RectTransform:
   m_Father: {fileID: 531630226}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0034176162, y: 0.7845689}
-  m_AnchorMax: {x: 0.5, y: 0.88058686}
-  m_AnchoredPosition: {x: 14, y: 0.70349884}
-  m_SizeDelta: {x: -0.6799927, y: 4.007004}
+  m_AnchorMin: {x: 0, y: 0.85315573}
+  m_AnchorMax: {x: 0, y: 0.85315573}
+  m_AnchoredPosition: {x: 173, y: -5.296509}
+  m_SizeDelta: {x: 313.32, y: 32.007004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1584894079
 MonoBehaviour:
@@ -2052,7 +2052,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Email:'
+  m_text: 'Username:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
