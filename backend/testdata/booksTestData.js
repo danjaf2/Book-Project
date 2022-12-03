@@ -23,6 +23,7 @@ module.exports = {
       });
     });
   },
+  
   seedUserBookShelves: async function () {
     const historyBooks = await Books.findAll({
       where: { genre: 'History' }
