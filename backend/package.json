@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha --reporter spec **/*.test.js",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 **/*.test.js",
     "start": "cross-env NODE_ENV=dev node swagger.js"
   },
   "author": "",
@@ -27,5 +27,11 @@
     "mocha": "^10.1.0",
     "supertest": "^6.3.2",
     "swagger-autogen": "^2.22.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
