@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node swagger.js"
+    "test": "cross-env NODE_ENV=test mocha --reporter spec **/*.test.js",
+    "start": "cross-env NODE_ENV=dev node swagger.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +21,11 @@
     "swagger-ui-express": "^4.6.0"
   },
   "devDependencies": {
+    "chai": "^4.3.7",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "mocha": "^10.1.0",
+    "supertest": "^6.3.2",
     "swagger-autogen": "^2.22.0"
   }
 }

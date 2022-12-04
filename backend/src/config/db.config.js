@@ -1,14 +1,3 @@
-module.exports = {
-  HOST: "localhost",
-  USER: "user",
-  PASSWORD: "password",
-  DB: "testdb",
-  dialect: "sqlite",
-  storage: "./database3.sqlite3",
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000,
-  },
-};
+version https://git-lfs.github.com/spec/v1
+oid sha256:76ad1fbc46f598b25ff35230c19a508729a595d93243490e08fcbba83c74adde
+size 536
